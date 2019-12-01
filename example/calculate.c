@@ -30,10 +30,7 @@ int main ()
         char *ptr = strtok(line, ", ");
         char *ptr2 = strtok(NULL, ", ");
         neg = atof(ptr2);
-        double *d;
-        d = g_hash_table_lookup(Negative, ptr) ;
-        if (d == NULL) {
-            d = malloc(sizeof(double)) ;
+        double *d = malloc(sizeof(double)) ;
             if(neg!=0) *d = log10(neg);
             else *d = 0; // zero prob handling.
             g_hash_table_insert(Negative, strdup(ptr), d) ;
@@ -42,10 +39,7 @@ int main ()
 //        d  = NULL;
         char *ptr3 = strtok(NULL, ", ");      // 다음 문자열을 잘라서 포인터를 반환
         nonneg = atof(ptr3);
-        double * d2 ;
-        d2 = g_hash_table_lookup(NonNegative,ptr) ;
-        if (d2 == NULL) {
-            d2 = malloc(sizeof(double)) ;
+        double * d2 = malloc(sizeof(double)) ;
             if(nonneg!=0)
             *d2 = log10(nonneg);
             else *d2 = 0;
@@ -56,7 +50,7 @@ int main ()
 //        free(d2);
 //        d2  = NULL;
 	}//line
-
+fclose(f);
 	//g_hash_table_foreach(counter, print_counter, 0x0) ; //negative를 출력
     //FILE * fp = fopen("model.csv", "w");
 
