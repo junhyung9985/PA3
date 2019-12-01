@@ -29,6 +29,7 @@ int main ()
         if (d == NULL) {
             d = malloc(sizeof(double)) ;
             if(neg!=0) *d = log10(neg);
+            else *d = 0; // zero prob handling.
             g_hash_table_insert(Negative, strdup(line), d) ;
         }
 //        free(d);
@@ -40,6 +41,7 @@ int main ()
             d2 = malloc(sizeof(double)) ;
             if(nonneg!=0)
             *d2 = log10(nonneg);
+            else *d2 = 0;
             g_hash_table_insert(NonNegative, strdup(line), d2) ;
         }
         
