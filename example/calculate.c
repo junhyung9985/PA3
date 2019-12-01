@@ -10,8 +10,6 @@ void print_counter (gpointer key, gpointer value, gpointer userdata)
     float * d = value ;
 
     printf("(%s, %f)\n", t, *d) ;
-    free(t);t  = NULL;
-    free(d);d  = NULL;
 }
 
 int main () 
@@ -30,7 +28,7 @@ int main ()
         d = g_hash_table_lookup(Negative, line) ;
         if (d == NULL) {
             d = malloc(sizeof(double)) ;
-            if(neg!=0) *d = log(neg);
+            if(neg!=0) *d = log10(neg);
             g_hash_table_insert(Negative, strdup(line), d) ;
         }
 //        free(d);
@@ -41,7 +39,7 @@ int main ()
         if (d2 == NULL) {
             d2 = malloc(sizeof(double)) ;
             if(nonneg!=0)
-            *d2 = log(nonneg);
+            *d2 = log10(nonneg);
             g_hash_table_insert(NonNegative, strdup(line), d2) ;
         }
         
@@ -54,8 +52,9 @@ int main ()
     //FILE * fp = fopen("model.csv", "w");
 //    FILE * fp = fopen("../data/model_prob.csv", "w");
 //    fclose(fp);//file초기화
-
+    printf("Negative\n");
     g_hash_table_foreach(Negative, print_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
+    printf("Non-negative\n");
     //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
     g_hash_table_foreach(NonNegative, print_counter, 0x0);
     
