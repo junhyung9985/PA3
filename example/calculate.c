@@ -53,6 +53,8 @@ int main ()
        printf("%s %lf %lf\n", ptr, neg, nonneg);
         free(ptr);
         free(ptr2);
+        ptr = NULL;
+        ptr2 = NULL;
 //        free(d2);
 //        d2  = NULL;
 	}//line
