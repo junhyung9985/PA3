@@ -18,23 +18,24 @@ int main ()
     GHashTable * Negative = g_hash_table_new(g_str_hash, g_str_equal) ;
     GHashTable * NonNegative = g_hash_table_new(g_str_hash, g_str_equal) ;
 	FILE * f = fopen("../data/model.csv", "r") ;
-    char line [10240]; float neg, nonneg;
+    char line [10240]; double neg, nonneg;
     size_t r ;
     size_t n = 0 ;
     
 	while (fscanf(f, "%s %f %f", line, &neg, &nonneg)>=0) {
-        float * d ;
+        double * d ;
         d = g_hash_table_lookup(Negative, line) ;
         if (d == NULL) {
-            d = malloc(sizeof(float)) ;
-            *d = log(neg);
+            d = malloc(sizeof(double)) ;
+            if(neg!=0) *d = log(neg);
             g_hash_table_insert(Negative, strdup(line), d) ;
         }
         
-        float * d2 ;
+        double * d2 ;
         d2 = g_hash_table_lookup(NonNegative, line) ;
         if (d == NULL) {
-            d2 = malloc(sizeof(float)) ;
+            d2 = malloc(sizeof(double)) ;
+            if(nonneg!=0)
             *d2 = log(nonneg);
             g_hash_table_insert(NonNegative, strdup(line), d) ;
         }
