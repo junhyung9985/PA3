@@ -12,6 +12,30 @@ void print_counter (gpointer key, gpointer value, gpointer userdata)
     printf("(%s, %f)\n", t, *d) ;
 }
 
+void save_counter(gpointer key, gpointer value, gpointer userdata){
+    char * t = key ;
+    int * d = value ;
+    FILE * fp = fopen("../data/model_prob.csv", "aw");
+    int * check = g_hash_table_lookup(nsave, t) ;
+    
+    if (check == NULL){
+        fprintf(fp, "%s, %f, 0\n", t, *d);
+    }
+    else{
+        fprintf(fp, "%s, %f, %f\n", t, *d);
+        g_hash_table_remove(nsave, t);
+    }
+    fclose(fp);
+}
+void save_counter2(gpointer key, gpointer value, gpointer userdata){
+    char * t = key ;
+    int * d = value ;
+    FILE * fp = fopen("../data/model_prob.csv", "aw");
+    fprintf(fp, "%s, 0, %f\n", t, *d);
+    fclose(fp);
+}
+
+
 int main () 
 {
     
@@ -49,7 +73,7 @@ int main ()
             else *d2 = 0;
             g_hash_table_insert(NonNegative, strdup(ptr), d2) ;
         }
-       printf("%s %lf %lf\n", ptr, neg, nonneg);
+      // printf("%s %lf %lf\n", ptr, neg, nonneg);
         
 //        free(d2);
 //        d2  = NULL;
@@ -61,10 +85,10 @@ int main ()
 //    FILE * fp = fopen("../data/model_prob.csv", "w");
 //    fclose(fp);//file초기화
 //    printf("Negative\n");
- g_hash_table_foreach(Negative, print_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
+ g_hash_table_foreach(Negative, save_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
 //    printf("Non-negative\n");
 //    //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
-  g_hash_table_foreach(NonNegative, print_counter, 0x0);
+  g_hash_table_foreach(NonNegative, save_counter2, 0x0);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
 	fclose(f) ;
