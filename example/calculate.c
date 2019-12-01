@@ -4,39 +4,12 @@
 #include <glib.h>
 #include <math.h>
 
-void print_counter (gpointer key, gpointer value, gpointer userdata)
+void print_counter (gpointer key, gpointer value, gpointer userdata, FILE * fp)
 {
     char * t = key ;
     float * d = value ;
 
-    printf("(%s, %f)\n", t, *d) ;
-}
-
-void save_counter(gpointer key, gpointer value, gpointer userdata){
-    char * t = key ;
-    int * d = value ;
-    FILE * fp = fopen("../data/model_prob.csv", "aw");
-    int * check = g_hash_table_lookup(nsave, t) ;
-    
-    if (check == NULL){
-        fprintf(fp, "%s, %f, 0\n", t, *d);
-    }
-    else{
-        fprintf(fp, "%s, %f, %f\n", t, *d);
-        g_hash_table_remove(nsave, t);
-    }
-    fclose(fp);
-    free(t);
-    free(d);
-}
-void save_counter2(gpointer key, gpointer value, gpointer userdata){
-    char * t = key ;
-    int * d = value ;
-    FILE * fp = fopen("../data/model_prob.csv", "aw");
-    fprintf(fp, "%s, 0, %f\n", t, *d);
-    fclose(fp);
-    free(t);
-    free(d);
+    fprintf(fp, "(%s, %f)\n", t, *d) ;
 }
 
 
@@ -82,23 +55,18 @@ int main ()
 //        free(d2);
 //        d2  = NULL;
 	}//line
-fclose(f) ;
-    free(d);
-    free(d2);
-    free(ptr);
-    free(ptr2);
-    free(ptr3);
+
 	//g_hash_table_foreach(counter, print_counter, 0x0) ; //negative를 출력
     //FILE * fp = fopen("model.csv", "w");
-//    FILE * fp = fopen("../data/model_prob.csv", "w");
+   FILE * fp = fopen("../data/model_prob.csv", "w");
 //    fclose(fp);//file초기화
 //    printf("Negative\n");
- g_hash_table_foreach(Negative, save_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
+ g_hash_table_foreach(Negative, print_counter, 0x0, fp); //non-negative출력(negative랑 중복되는 것 제외)
 //    printf("Non-negative\n");
 //    //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
-  g_hash_table_foreach(NonNegative, save_counter2, 0x0);
+  g_hash_table_foreach(NonNegative, print_counter2, 0x0, fp);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
-	
+    fclose(fp);
     printf("Calculated\n");
 }
