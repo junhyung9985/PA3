@@ -36,7 +36,7 @@ int main ()
         }
 //        free(d);
 //        d  = NULL;
-        char *ptr2 = strtok(NULL, " ");      // 다음 문자열을 잘라서 포인터를 반환
+        ptr2 = strtok(NULL, " ");      // 다음 문자열을 잘라서 포인터를 반환
         nonneg = atof(ptr2);
         double * d2 ;
         d2 = g_hash_table_lookup(NonNegative, line) ;
