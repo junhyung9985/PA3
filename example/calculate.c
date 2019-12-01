@@ -26,6 +26,8 @@ void save_counter(gpointer key, gpointer value, gpointer userdata){
         g_hash_table_remove(nsave, t);
     }
     fclose(fp);
+    free(t);
+    free(d);
 }
 void save_counter2(gpointer key, gpointer value, gpointer userdata){
     char * t = key ;
@@ -33,6 +35,8 @@ void save_counter2(gpointer key, gpointer value, gpointer userdata){
     FILE * fp = fopen("../data/model_prob.csv", "aw");
     fprintf(fp, "%s, 0, %f\n", t, *d);
     fclose(fp);
+    free(t);
+    free(d);
 }
 
 
@@ -78,8 +82,12 @@ int main ()
 //        free(d2);
 //        d2  = NULL;
 	}//line
-
-
+fclose(f) ;
+    free(d);
+    free(d2);
+    free(ptr);
+    free(ptr2);
+    free(ptr3);
 	//g_hash_table_foreach(counter, print_counter, 0x0) ; //negative를 출력
     //FILE * fp = fopen("model.csv", "w");
 //    FILE * fp = fopen("../data/model_prob.csv", "w");
@@ -91,6 +99,6 @@ int main ()
   g_hash_table_foreach(NonNegative, save_counter2, 0x0);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
-	fclose(f) ;
+	
     printf("Calculated\n");
 }
