@@ -22,7 +22,7 @@ int main ()
     size_t r ;
     size_t n = 0 ;
     
-	while (fscanf(f, "%s %lf %lf", line, &neg, &nonneg)>=0) {
+	while (fscanf(f, "%s, %lf, %lf", line, &neg, &nonneg)>=0) {
         printf("%s %lf %lf\n", line, neg, nonneg);
         double * d ;
         d = g_hash_table_lookup(Negative, line) ;
