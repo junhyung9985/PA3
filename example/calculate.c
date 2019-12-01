@@ -10,6 +10,8 @@ void print_counter (gpointer key, gpointer value, gpointer userdata)
     float * d = value ;
 
     printf("(%s, %f)\n", t, *d) ;
+    free(t);t  = NULL;
+    free(d);d  = NULL;
 }
 
 int main () 
@@ -30,17 +32,19 @@ int main ()
             if(neg!=0) *d = log(neg);
             g_hash_table_insert(Negative, strdup(line), d) ;
         }
-        
+        free(d);
+        d  = NULL;
         double * d2 ;
         d2 = g_hash_table_lookup(NonNegative, line) ;
         if (d == NULL) {
             d2 = malloc(sizeof(double)) ;
             if(nonneg!=0)
             *d2 = log(nonneg);
-            g_hash_table_insert(NonNegative, strdup(line), d) ;
+            g_hash_table_insert(NonNegative, strdup(line), d2) ;
         }
         
-        free(d); free(d2);
+        free(d2);
+        d2  = NULL;
 	}//line
 
 
@@ -55,5 +59,5 @@ int main ()
     
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
 	fclose(f) ;
-    printf("[System] model.csv is made\n");
+    printf("Calculated\n");
 }
