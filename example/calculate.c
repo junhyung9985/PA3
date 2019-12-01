@@ -23,7 +23,7 @@ int main ()
     size_t n = 0 ;
     
 	while (fscanf(f, "%s %lf %lf", line, &neg, &nonneg)>=0) {
-        printf("%s %lf %lf", line, neg, nonneg);
+        printf("%s %lf %lf\n", line, neg, nonneg);
         double * d ;
         d = g_hash_table_lookup(Negative, line) ;
         if (d == NULL) {
@@ -59,7 +59,7 @@ int main ()
 //    printf("Non-negative\n");
 //    //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
 //    g_hash_table_foreach(NonNegative, print_counter, 0x0);
-//    
+//
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
 	fclose(f) ;
     printf("Calculated\n");
