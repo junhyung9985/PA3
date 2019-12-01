@@ -4,6 +4,7 @@
 #include <glib.h>
 #include <ctype.h>
 #include "../include/libstemmer.h"
+#include <math.h>
 
 int wc = 0; //word count (중복포함)
 int * wcp = &wc; //word count pointer
@@ -31,14 +32,14 @@ void print_counter (gpointer key, gpointer value, gpointer userdata)
 void save_counter(gpointer key, gpointer value, gpointer userdata){
     char * t = key ;
 	int * d = value ;
-    FILE * fp = fopen("../data/model.csv", "aw");
+    FILE * fp = fopen("../data/model_logproba.csv", "aw");
     int * check = g_hash_table_lookup(nsave, t) ;
     
     if (check == NULL){
-        fprintf(fp, "%s, %f, 0\n", t, (*d)*100.0/(*lcp));
+        fprintf(fp, "%s, %f, 0\n", t, log10f((*d)*100.0/(*lcp)));
     }
     else{
-        fprintf(fp, "%s, %f, %f\n", t, (*d)*100.0/(*lcp), (*check)*100.0/(*nlcp));
+        fprintf(fp, "%s, %f, %f\n", t, log10f((*d)*100.0/(*lcp)), log10f((*check)*100.0/(*nlcp)));
         g_hash_table_remove(nsave, t);
     }
     fclose(fp);
@@ -46,8 +47,8 @@ void save_counter(gpointer key, gpointer value, gpointer userdata){
 void save_counter2(gpointer key, gpointer value, gpointer userdata){
     char * t = key ;
 	int * d = value ;
-    FILE * fp = fopen("../data/model.csv", "aw");
-    fprintf(fp, "%s, 0, %f\n", t, (*d)*100.0/(*nlcp));
+    FILE * fp = fopen("../data/model_logproba.csv", "aw");
+    fprintf(fp, "%s, 0, %f\n", t, log10f((*d)*100.0/(*nlcp)));
     fclose(fp);
 }
 
