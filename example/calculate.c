@@ -23,7 +23,7 @@ int main ()
     size_t n = 0 ;
     
 	while (1) {
-        fgets(line, strlen(line), f);
+        fgets(line, 10240, f);
          if(feof(f))break;
         printf("%s\n", line);
         char *ptr = strtok(line, ", ");
