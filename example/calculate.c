@@ -5,11 +5,12 @@
 #include <math.h>
 
 void print_counter (gpointer key, gpointer value, gpointer userdata, FILE * fp)
-{
+{  FILE * fp = fopen("../data/model_prob.csv", "w");
     char * t = key ;
     float * d = value ;
 
     fprintf(fp, "(%s, %f)\n", t, *d) ;
+    fclose(fp);
 }
 
 
@@ -58,13 +59,12 @@ int main ()
 
 	//g_hash_table_foreach(counter, print_counter, 0x0) ; //negative를 출력
     //FILE * fp = fopen("model.csv", "w");
-   FILE * fp = fopen("../data/model_prob.csv", "w");
 //    fclose(fp);//file초기화
 //    printf("Negative\n");
- g_hash_table_foreach(Negative, print_counter, 0x0, fp); //non-negative출력(negative랑 중복되는 것 제외)
+ g_hash_table_foreach(Negative, print_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
 //    printf("Non-negative\n");
 //    //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
-  g_hash_table_foreach(NonNegative, print_counter2, 0x0, fp);
+  g_hash_table_foreach(NonNegative, print_counter, 0x0);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
     fclose(fp);
