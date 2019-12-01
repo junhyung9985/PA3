@@ -25,6 +25,7 @@ int main ()
     size_t n = 0 ;
     
 	while (fscanf(f, "%s %lf %lf", line, &neg, &nonneg)>=0) {
+        
         double * d ;
         d = g_hash_table_lookup(Negative, line) ;
         if (d == NULL) {
@@ -32,19 +33,20 @@ int main ()
             if(neg!=0) *d = log(neg);
             g_hash_table_insert(Negative, strdup(line), d) ;
         }
-        free(d);
-        d  = NULL;
+//        free(d);
+//        d  = NULL;
+        
         double * d2 ;
         d2 = g_hash_table_lookup(NonNegative, line) ;
-        if (d == NULL) {
+        if (d2 == NULL) {
             d2 = malloc(sizeof(double)) ;
             if(nonneg!=0)
             *d2 = log(nonneg);
             g_hash_table_insert(NonNegative, strdup(line), d2) ;
         }
         
-        free(d2);
-        d2  = NULL;
+//        free(d2);
+//        d2  = NULL;
 	}//line
 
 
