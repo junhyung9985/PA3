@@ -23,7 +23,8 @@ int main ()
     size_t n = 0 ;
     
 	while (fgets(line, strlen(line), f) ) {
-        char *ptr = strtok(line, ", ");
+        printf("%s\n", line);
+	char *ptr = strtok(line, ", ");
         char *ptr2 = strtok(NULL, ", ");
         neg = atof(ptr2);
         double *d;
