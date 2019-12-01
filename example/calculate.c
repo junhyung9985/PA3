@@ -38,8 +38,8 @@ int main ()
         }
 //        free(d);
 //        d  = NULL;
-        ptr2 = strtok(NULL, ", ");      // 다음 문자열을 잘라서 포인터를 반환
-        nonneg = atof(ptr2);
+        char *ptr3 = strtok(NULL, ", ");      // 다음 문자열을 잘라서 포인터를 반환
+        nonneg = atof(ptr3);
         double * d2 ;
         d2 = g_hash_table_lookup(NonNegative,ptr) ;
         if (d2 == NULL) {
@@ -50,10 +50,7 @@ int main ()
             g_hash_table_insert(NonNegative, strdup(ptr), d2) ;
         }
        printf("%s %lf %lf\n", ptr, neg, nonneg);
-        free(ptr);
-        free(ptr2);
-        ptr = NULL;
-        ptr2 = NULL;
+        
 //        free(d2);
 //        d2  = NULL;
 	}//line
