@@ -7,9 +7,9 @@
 void print_counter (gpointer key, gpointer value, gpointer userdata)
 {
     char * t = key ;
-    int * d = value ;
+    float * d = value ;
 
-    printf("(%s, %d, %.3f)\n", t, *d, (*d)*100.0/(*lcp)) ;
+    printf("(%s, %f)\n", t, *d) ;
 }
 
 int main () 
