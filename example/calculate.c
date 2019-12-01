@@ -47,7 +47,9 @@ int main ()
             else *d2 = 0;
             g_hash_table_insert(NonNegative, strdup(ptr), d2) ;
         }
-       // printf("%s %lf %lf\n", ptr, neg, nonneg);
+       printf("%s %lf %lf\n", ptr, neg, nonneg);
+        free(ptr);
+        free(ptr2);
 //        free(d2);
 //        d2  = NULL;
 	}//line
