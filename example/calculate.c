@@ -4,7 +4,7 @@
 #include <glib.h>
 #include <math.h>
 
-void print_counter (gpointer key, gpointer value, gpointer userdata, FILE * fp)
+void print_counter (gpointer key, gpointer value, gpointer userdata)
 {  FILE * fp = fopen("../data/model_prob.csv", "w");
     char * t = key ;
     float * d = value ;
