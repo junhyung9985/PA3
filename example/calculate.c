@@ -18,14 +18,13 @@ int main ()
     GHashTable * Negative = g_hash_table_new(g_str_hash, g_str_equal) ;
     GHashTable * NonNegative = g_hash_table_new(g_str_hash, g_str_equal) ;
 	FILE * f = fopen("../data/model.csv", "r") ;
-    char line [10240]; double neg, nonneg;
+    char line [1000000]; double neg, nonneg;
     size_t r ;
     size_t n = 0 ;
     
 	while (1) {
-        fgets(line, 10240, f);
+        fgets(line, 1000000, f);
          if(feof(f))break;
-        printf("%s\n", line);
         char *ptr = strtok(line, ", ");
         char *ptr2 = strtok(NULL, ", ");
         neg = atof(ptr2);
