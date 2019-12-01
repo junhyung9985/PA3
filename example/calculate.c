@@ -22,9 +22,11 @@ int main ()
     size_t r ;
     size_t n = 0 ;
     
-	while (fgets(line, strlen(line), f) ) {
+	while (1) {
+        fgets(line, strlen(line), f);
+         if(feof(f))break;
         printf("%s\n", line);
-	char *ptr = strtok(line, ", ");
+        char *ptr = strtok(line, ", ");
         char *ptr2 = strtok(NULL, ", ");
         neg = atof(ptr2);
         double *d;
