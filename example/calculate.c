@@ -67,6 +67,6 @@ int main ()
   g_hash_table_foreach(NonNegative, print_counter, 0x0);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
-    fclose(fp);
+    //fclose(fp);
     printf("Calculated\n");
 }
