@@ -34,7 +34,7 @@ int main ()
             if(neg!=0) *d = log10(neg);
             else *d = 0; // zero prob handling.
             g_hash_table_insert(Negative, strdup(ptr), d) ;
-        }
+        
 //        free(d);
 //        d  = NULL;
         char *ptr3 = strtok(NULL, ", ");      // 다음 문자열을 잘라서 포인터를 반환
@@ -44,13 +44,13 @@ int main ()
             *d2 = log10(nonneg);
             else *d2 = 0;
             g_hash_table_insert(NonNegative, strdup(ptr), d2) ;
-        }
+        
       // printf("%s %lf %lf\n", ptr, neg, nonneg);
         printf("%d\n", a);
 //        free(d2);
 //        d2  = NULL;
 	}//line
-fclose(f);
+    fclose(f);
 	//g_hash_table_foreach(counter, print_counter, 0x0) ; //negative를 출력
     //FILE * fp = fopen("model.csv", "w");
 
