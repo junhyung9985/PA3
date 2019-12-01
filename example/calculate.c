@@ -24,7 +24,7 @@ int main ()
     
 	while (fgets(line, strlen(line), f) ) {
         char *ptr = strtok(line, ",");      // " " 공백 문자를 기준으로 문자열을 자름, 포인터 반환
-        char *ptr2 = strtok(NULL, " ");      // 다음 문자열을 잘라서 포인터를 반환
+        char *ptr2 = strtok(NULL, ",");      // 다음 문자열을 잘라서 포인터를 반환
         neg = atof(ptr2);
         double *d;
         d = g_hash_table_lookup(Negative, line) ;
@@ -36,7 +36,7 @@ int main ()
         }
 //        free(d);
 //        d  = NULL;
-        ptr2 = strtok(NULL, " ");      // 다음 문자열을 잘라서 포인터를 반환
+        ptr2 = strtok(NULL, ",");      // 다음 문자열을 잘라서 포인터를 반환
         nonneg = atof(ptr2);
         double * d2 ;
         d2 = g_hash_table_lookup(NonNegative, line) ;
