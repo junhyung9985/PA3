@@ -22,8 +22,9 @@ int main ()
     char line [1000000]; double neg, nonneg;
     size_t r ;
     size_t n = 0 ;
-    
+    int a = 0;
 	while (1) {
+        a++;
         fgets(line, 1000000, f);
          if(feof(f))break;
         char *ptr = strtok(line, ", ");
@@ -51,7 +52,7 @@ int main ()
             g_hash_table_insert(NonNegative, strdup(ptr), d2) ;
         }
       // printf("%s %lf %lf\n", ptr, neg, nonneg);
-        
+        printf("%d\n", a);
 //        free(d2);
 //        d2  = NULL;
 	}//line
@@ -64,7 +65,7 @@ int main ()
  g_hash_table_foreach(Negative, print_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
 //    printf("Non-negative\n");
 //    //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
-  g_hash_table_foreach(NonNegative, print_counter2, 0x0);
+  g_hash_table_foreach(NonNegative, print_counter, 0x0);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
 
