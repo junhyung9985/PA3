@@ -19,11 +19,10 @@ int main ()
     GHashTable * NonNegative = g_hash_table_new(g_str_hash, g_str_equal) ;
 	FILE * f = fopen("../data/model.csv", "r") ;
     char line [10240]; float neg, nonneg;
-    char * line = 0x0 ;
     size_t r ;
     size_t n = 0 ;
     
-	while (fscanf(fp, "%s %f %f", s1, &neg, &nonneg)>=0) {
+	while (fscanf(fp, "%s %f %f", line, &neg, &nonneg)>=0) {
         float * d ;
         d = g_hash_table_lookup(Negative, line) ;
         if (d == NULL) {
