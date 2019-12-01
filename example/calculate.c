@@ -27,27 +27,27 @@ int main ()
         char *ptr2 = strtok(NULL, ",");      // 다음 문자열을 잘라서 포인터를 반환
         neg = atof(ptr2);
         double *d;
-        d = g_hash_table_lookup(Negative, line) ;
+        d = g_hash_table_lookup(Negative, ptr) ;
         if (d == NULL) {
             d = malloc(sizeof(double)) ;
             if(neg!=0) *d = log10(neg);
             else *d = 0; // zero prob handling.
-            g_hash_table_insert(Negative, strdup(line), d) ;
+            g_hash_table_insert(Negative, strdup(ptr), d) ;
         }
 //        free(d);
 //        d  = NULL;
         ptr2 = strtok(NULL, ",");      // 다음 문자열을 잘라서 포인터를 반환
         nonneg = atof(ptr2);
         double * d2 ;
-        d2 = g_hash_table_lookup(NonNegative, line) ;
+        d2 = g_hash_table_lookup(NonNegative,ptr) ;
         if (d2 == NULL) {
             d2 = malloc(sizeof(double)) ;
             if(nonneg!=0)
             *d2 = log10(nonneg);
             else *d2 = 0;
-            g_hash_table_insert(NonNegative, strdup(line), d2) ;
+            g_hash_table_insert(NonNegative, strdup(ptr), d2) ;
         }
-        printf("%s %lf %lf\n", ptr, neg, nonneg);
+       // printf("%s %lf %lf\n", ptr, neg, nonneg);
 //        free(d2);
 //        d2  = NULL;
 	}//line
@@ -58,10 +58,10 @@ int main ()
 //    FILE * fp = fopen("../data/model_prob.csv", "w");
 //    fclose(fp);//file초기화
 //    printf("Negative\n");
-//    g_hash_table_foreach(Negative, print_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
+ g_hash_table_foreach(Negative, print_counter, 0x0); //non-negative출력(negative랑 중복되는 것 제외)
 //    printf("Non-negative\n");
 //    //g_hash_table_foreach(ncounter, print_counter, 0x0) ;
-//    g_hash_table_foreach(NonNegative, print_counter, 0x0);
+  g_hash_table_foreach(NonNegative, print_counter, 0x0);
 //
 	//printf("worst: %d\n", *((int *) g_hash_table_lookup(counter, "worst"))) ;
 	fclose(f) ;
